@@ -7,6 +7,7 @@ import {
 	ListItemButton,
 	ListItemIcon,
 	ListItemText,
+	useMediaQuery,
 	useTheme,
 } from '@mui/material';
 import { Box } from '@mui/system';
@@ -18,10 +19,11 @@ interface IDrawerProps {
 
 export const MenuLateral = ({ children }: IDrawerProps) => {
 	const theme = useTheme();
+	const smDown = useMediaQuery(theme.breakpoints.down('sm'));
 
 	return (
 		<>
-			<Drawer variant="permanent">
+			<Drawer variant={smDown ? 'temporary' : 'permanent'}>
 				<Box
 					width={theme.spacing(28)}
 					height="100%"
@@ -54,7 +56,7 @@ export const MenuLateral = ({ children }: IDrawerProps) => {
 				</Box>
 			</Drawer>
 
-			<Box height="100vh" marginLeft={theme.spacing(28)}>
+			<Box height="100vh" marginLeft={smDown ? 0 : theme.spacing(28)}>
 				{children}
 			</Box>
 		</>
